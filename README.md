@@ -2,8 +2,8 @@
 </br>
 Group Members: </br>
 Barry Ibarra </br>
-Viet Le</br>
-Daniel Bravo
+Viet Le </br>
+Daniel Bravo </br>
 
 </br>
 Psudo code will look something like: 
