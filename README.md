@@ -31,3 +31,7 @@ Is it ok if we assume/force this project to have the same number of processes as
 </br>
 When we're trying to run it with `mpirun -n __ ./a.out` is it ok if we have a predetermined value in the __ space or would you want something more dynamic?
 </br>
+</br>
+If it is necessary to scatter the string array (I'm assuming because it'd be easier for each process to read the array of events its responsible for)
+</br>
+Can you help us on how to scatter a 2d string array? (I'm assuming she has more experience with this than we do and we'll eventually solve it, it'll just take more time)
