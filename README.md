@@ -21,6 +21,7 @@ MPI_Finalize
 Questions to ask the Professor
 </br>
 If we're not modifying the string array, do we even need to scatter it? It can be maintained as a shared array that every process can read.
+</br>
 Asking because it seems like scattering a string array with mpi_scatter seems finicky at best and a nightmare at worst.
 </br>
 </br>
