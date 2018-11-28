@@ -1,7 +1,7 @@
 # Lamport's Logical Clock implemented using MPI
 </br>
 Psudo code will look something like: 
-</br>
+
 ```
 string array[n][m]
 int array [n][m + 1] // Will be the array holding the final solution, with element 0 holding the value of the process's current LC value 
