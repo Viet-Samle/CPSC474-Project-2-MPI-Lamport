@@ -61,17 +61,19 @@ int main(int argc, char *argv[]) {
     int answers[N][M][event_size] = {0};
   }
 
-  int **sub_answers = new int *[1];
-  for (int i = 0; i < 1; i++) {
-    sub_answers[i] = new int[M + 1];
-  }
-  char ***sub_events = new char **[1];
-  for (int i = 0; i < 1; i++) {
-    sub_events[i] = new char *[M];
-    for (int j = 0; j < M; j++) {
-      sub_events[i][j] = new char[event_size];
-    }
-  }
+  // int **sub_answers = new int *[1];
+  // for (int i = 0; i < 1; i++) {
+  //   sub_answers[i] = new int[M + 1];
+  // }
+  // char ***sub_events = new char **[1];
+  // for (int i = 0; i < 1; i++) {
+  //   sub_events[i] = new char *[M];
+  //   for (int j = 0; j < M; j++) {
+  //     sub_events[i][j] = new char[event_size];
+  //   }
+  // }
+  int sub_answers[1][M + 1];
+  char sub_events[1][M][2];
   MPI_Scatter(given_events, N * M, MPI_CHAR, sub_events, N * M, MPI_CHAR, 0, MPI_COMM_WORLD);
   for (int i = 0; i < 1; i++) {
     cout << endl;
