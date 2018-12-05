@@ -5,7 +5,7 @@
 
 using namespace std;
 
-#define N 10
+#define N 1
 #define M 10
 #define event_size 2
 
@@ -22,23 +22,45 @@ int main(int argc, char *argv[]) {
 
   if (rank == 0) {
     string line;
+    char event[2];
     ifstream test_file;
-    if (test_file.open("input.txt")) {
-
+    test_file.open("input.txt");
+    if (test_file) {
+      cout << "Read file" << endl;
+    }
+    else {
+      cout << "File not read" << endl;
+      return 0;
     }
 
-    cout << "Enter the input for the logical clock" << endl;
     for (int i = 0; i < N; i++) {
-      cout << "Enter the events for process " << i << endl;
+      getline(test_file, line);
+      //cout << line << endl;
       for (int j = 0; j < M; j++) {
-        cin >> input;
-        if (input != "NULL") {
-            given_events[i][j] = input;
+        event[0] = line[j * 2];
+        //cout << event[0];
+        event[1] = line[j * 2 + 1];
+        //cout << event[1];
+        for (int k = 0; k < event_size; k++) {
+          given_events[i][j][k] = event[k];
         }
       }
     }
+    test_file.close();
+    // For testing purposes. Printing the given_events
+  /*
+    for (int i = 0; i < N; i++) {
+      cout << endl;
+      for (int j = 0; j < M; j++) {
+        for (int k = 0; k < event_size; k++) {
+          cout << given_events[i][j][k];
+        }
+      }
+    }
+  */
 
   }
 
-
+  MPI_Finalize();
+  return 0;
 }
