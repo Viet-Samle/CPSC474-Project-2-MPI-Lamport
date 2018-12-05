@@ -5,7 +5,7 @@
 
 using namespace std;
 
-#define N 1
+#define N 2
 #define M 10
 #define event_size 2
 
@@ -83,6 +83,7 @@ int main(int argc, char *argv[]) {
       }
     }
   }
+  cout << endl;
 
 
 
