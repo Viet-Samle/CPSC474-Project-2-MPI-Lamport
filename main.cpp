@@ -74,7 +74,7 @@ int main(int argc, char *argv[]) {
   // }
   int sub_answers[1][M + 1];
   char sub_events[1][M][2];
-  MPI_Scatter(given_events, N * M, MPI_CHAR, sub_events, N * M, MPI_CHAR, 0, MPI_COMM_WORLD);
+  MPI_Scatter(given_events, M * event_size, MPI_CHAR, sub_events, M * event_size, MPI_CHAR, 0, MPI_COMM_WORLD);
   for (int i = 0; i < 1; i++) {
     cout << endl;
     for (int j = 0; j < M; j++) {
