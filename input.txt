@@ -1,2 +1,2 @@
-a b s1c d r1e s2f r2
-g h s3r3i j k l s4r4
+a bs1 c 
+d r1e f
