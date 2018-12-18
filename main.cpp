@@ -65,18 +65,19 @@ int main(int argc, char *argv[]) {
   }
   // MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, sub_events, M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 
-  // if (rank != 0) {
-  //     cout << "printing given events..." << endl;
-  //     for (int i = 0; i < 1; i++) {
-  //       cout << endl;
-  //       for (int j = 0; j < M; j++) {
-  //         for (int k = 0; k < EVENT_SIZE; k++) {
-  //           cout << sub_events[i][j][k];
-  //         }
-  //       }
-  //     }
-  //     cout << endl;
-  // }
+  if (rank != 0) {
+      cout << "printing given events..." << endl;
+      cout << "Process: " << rank << endl;
+      for (int i = 0; i < 1; i++) {
+        cout << endl;
+        for (int j = 0; j < M; j++) {
+          for (int k = 0; k < EVENT_SIZE; k++) {
+            cout << sub_events[i][j][k];
+          }
+        }
+      }
+      cout << endl;
+  }
 
   if(rank == 0) {
     MPI_Status status;
