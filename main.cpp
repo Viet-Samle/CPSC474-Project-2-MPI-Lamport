@@ -54,21 +54,20 @@ int main(int argc, char *argv[]) {
   }
 
   MPI_Barrier(MPI_COMM_WORLD);
-  // Scatter the array
   if (rank != 0) {
-    int * sub_answers = new int[1][M];
-    char * sub_events = new char[1][M][2];
+    int sub_answers [1][M];
+    char sub_events [1][M][EVENT_SIZE];
   }
   else {
-    char * sub_events = static_cast<char *>(MPI_IN_PLACE);
+    NULL; 
   }
-  // if (rank == 0) {
-  //   MPI_scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
-  // }
-  // else {
-  //   MPI_scatter(NULL, M * EVENT_SIZE, MPI_CHAR, sub_events,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
-  // }
-  MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, &sub_events, M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
+  if (rank == 0) {
+    MPI_scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
+  }
+  else {
+    MPI_scatter(NULL, M * EVENT_SIZE, MPI_CHAR, sub_events,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
+  }
+  // MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, &sub_events, M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 
   if (rank != 0) {
       cout << "printing given events..." << endl;
