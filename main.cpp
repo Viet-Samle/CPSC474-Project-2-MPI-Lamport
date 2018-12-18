@@ -85,7 +85,7 @@ int main(int argc, char *argv[]) {
         MPI_Recv(recv_buffer, 4, MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
         cout << "received: ";
         for(int i = 0; i < 4; i++) {
-            cout << recv_buffer;
+            cout << recv_buffer[i];
         }
         cout << endl;
 
@@ -112,7 +112,8 @@ int main(int argc, char *argv[]) {
       MPI_Status istatus;
 
       for (int i = 0; i < M; i++) {
-        if (sub_events[1][i][0] == 's') {
+        cout << "current sub event: " << sub_events[0][i][0] << endl;
+        if (sub_events[0][i][0] == 's') {
             sub_answers[0][i] = ++lc_val;
 
             // Convert lc_val to a 2-char array
@@ -120,23 +121,25 @@ int main(int argc, char *argv[]) {
             snprintf (tmp, 3, "%02d", lc_val);
 
             // Create send message
-            char send_msg[4] = {'s', sub_events[1][i][1], tmp[0], tmp[1]};
+            char send_msg[4] = {'s', sub_events[0][i][1], tmp[0], tmp[1]};
 
             // Send message and keep going
             cout << "process: " << rank;
             cout << " sending msg: " << send_msg << endl;
-            MPI_Isend(send_msg, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &ireq);
-            MPI_Wait(&ireq, &istatus);
+            // MPI_Isend(&send_msg, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &ireq);
+            // MPI_Wait(&ireq, &istatus);
+
+            MPI_Send(&send_msg, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
 
         } else if (sub_events[0][i][0] == 'r') {
             int val = -1;
             int sleep_time = .5 * 1000;
 
-            char send_msg[4] = {'r', sub_events[1][i][1], -100, -100};
+            char send_msg[4] = {'r', sub_events[0][i][1], '!', '!'};
 
             do {
 
-                MPI_Send(&send_msg, 1, MPI_INT, 0, 0, MPI_COMM_WORLD);
+                MPI_Send(&send_msg, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
                 MPI_Recv(&val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
                 cout << "process " << rank << " about to sleep..." << endl;
                 usleep(sleep_time);
@@ -151,7 +154,7 @@ int main(int argc, char *argv[]) {
       }
 
       // Create send message
-      char send_msg[4] = {'d', 0, 0, 0};
+      char send_msg[4] = {'d', -10, -10, -10};
 
       // Send message and keep going
       cout << "process " << rank << " is done!!!!" << endl;
