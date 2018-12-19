@@ -13,13 +13,14 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   int size, rank;
-  char given_events[N][M][EVENT_SIZE];
+  // char given_events[N][M][EVENT_SIZE];
 
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);     // My process number
   MPI_Comm_size(MPI_COMM_WORLD, &size);     // How many processes there are
 
   if (rank == 0) {
+    char given_events[N][M][EVENT_SIZE];
     string line;
     char event[2];
     ifstream test_file;
@@ -52,11 +53,14 @@ int main(int argc, char *argv[]) {
 
     int answers[N][M][EVENT_SIZE];
   }
-
+  else {
+    int sub_answers[1][M];
+    char sub_events[1][M][EVENT_SIZE];
+  }
   MPI_Barrier(MPI_COMM_WORLD);
 
-  int sub_answers [1][M];
-  char sub_events [1][M][EVENT_SIZE];
+  // int sub_answers [1][M];
+  // char sub_events [1][M][EVENT_SIZE];
 
   if (rank == 0) {
     MPI_scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
