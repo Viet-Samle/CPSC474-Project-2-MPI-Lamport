@@ -27,10 +27,10 @@ int main(int argc, char *argv[]) {
     // Read input file
     test_file.open("input.txt");
     if (test_file) {
-      cout << "Read file" << endl;
+      // cout << "Read file" << endl;
     }
     else {
-      cout << "File not read" << endl;
+      // cout << "File not read" << endl;
       return 0;
     }
 
@@ -44,16 +44,16 @@ int main(int argc, char *argv[]) {
       }
     }
 
-    cout << "Receive this from the text file" << endl;
+    // cout << "Receive this from the text file" << endl;
     for (int i = 0; i < N; i++) {
       for (int j = 0; j < M; j++) {
           for (int k = 0; k < EVENT_SIZE; k++) {
-              cout << given_events[i][j][k];
+              // cout << given_events[i][j][k];
           }
       }
-      cout << endl;
+      // cout << endl;
     }
-    cout << endl;
+    // cout << endl;
 
     for (int i = 1; i < N+1; i++) {
       getline(test_file, line);
@@ -71,16 +71,16 @@ int main(int argc, char *argv[]) {
     test_file.close();
 
     // print array
-    cout << "Receive this from the text file" << endl;
+    // cout << "Receive this from the text file" << endl;
     for (int i = 0; i < N; i++) {
       for (int j = 0; j < M; j++) {
           for (int k = 0; k < EVENT_SIZE; k++) {
-              cout << given_events[i][j][k];
+              // cout << given_events[i][j][k];
           }
       }
-      cout << endl;
+      // cout << endl;
     }
-    cout << endl;
+    // cout << endl;
 
 
     int answers[N][M][EVENT_SIZE];
@@ -95,25 +95,25 @@ int main(int argc, char *argv[]) {
   if (rank == 0) {
 
     int result = MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  0, MPI_CHAR, 0, MPI_COMM_WORLD);
-    cout << "MPI result " << result << endl;
+    // cout << "MPI result " << result << endl;
   }
   else {
     int result = MPI_Scatter(NULL, M * EVENT_SIZE, MPI_CHAR, &sub_events,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
-    cout << "MPI result " << result << endl;
+    // cout << "MPI result " << result << endl;
   }
   // MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, &sub_events, M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 
   if (rank != 10) {
-      cout << "printing given events..." << endl;
-      cout << "Process: " << rank << endl;
+      // cout << "printing given events..." << endl;
+      // cout << "Process: " << rank << endl;
       for (int i = 0; i < 1; i++) {
         for (int j = 0; j < M; j++) {
           for (int k = 0; k < EVENT_SIZE; k++) {
-            cout << sub_events[i][j][k];
+            // cout << sub_events[i][j][k];
           }
         }
       }
-      cout << endl;
+      // cout << endl;
   }
 
   if(rank == 0) {
@@ -124,14 +124,14 @@ int main(int argc, char *argv[]) {
     int send_array[100];
     fill_n(send_array, 100, -1);
 
-    cout << "process 0 waiting to receive..." << endl;
+    // cout << "process 0 waiting to receive..." << endl;
     while (num_done != N) {
         MPI_Recv(recv_buffer, 4, MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
-        cout << "received: ";
+        // cout << "received: ";
         for(int i = 0; i < 4; i++) {
-            cout << recv_buffer[i];
+            // cout << recv_buffer[i];
         }
-        cout << endl;
+        // cout << endl;
 
         if (recv_buffer[0] == 's') {
             char c = recv_buffer[1];
@@ -141,7 +141,7 @@ int main(int argc, char *argv[]) {
 
             send_array[index] = val;
 
-            cout << "index: " << index << " value: " << send_array[index] << endl;
+            // cout << "index: " << index << " value: " << send_array[index] << endl;
 
             // cout << "current send array ";
             // for (int i = 0; i < 6; i++) {
@@ -154,11 +154,11 @@ int main(int argc, char *argv[]) {
             // int index = recv_buffer[1];
             int send_val = send_array[index];
 
-            cout << "received index: " << index << endl;
+            // cout << "received index: " << index << endl;
 
             // Send message and keep going
-            cout << "process: " << rank;
-            cout << " sending msg: " << send_val << endl;
+            // cout << "process: " << rank;
+            // cout << " sending msg: " << send_val << endl;
 
             MPI_Send(&send_val, 1, MPI_INT, status.MPI_SOURCE, 0, MPI_COMM_WORLD);
 
@@ -172,21 +172,21 @@ int main(int argc, char *argv[]) {
       MPI_Status istatus;
 
       for (int i = 0; i < M; i++) {
-        cout << "current sub event: " << sub_events[0][i][0] << endl;
+        // cout << "current sub event: " << sub_events[0][i][0] << endl;
         if (sub_events[0][i][0] == 's') {
             sub_answers[0][i] = ++lc_val;
 
             // Convert lc_val to a 2-char array
             char tmp[3];
             snprintf (tmp, 3, "%02d", lc_val);
-            cout << "THE VALUE OF lc_val is " << tmp << endl;
+            // cout << "THE VALUE OF lc_val is " << tmp << endl;
 
             // Create send message
             char send_msg[4] = {'s', sub_events[0][i][1], tmp[0], tmp[1]};
 
             // Send message and keep going
-            cout << "process: " << rank;
-            cout << " sending msg: " << send_msg << endl;
+            // cout << "process: " << rank;
+            // cout << " sending msg: " << send_msg << endl;
             // MPI_Isend(&send_msg, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD, &ireq);
             // MPI_Wait(&ireq, &istatus);
 
@@ -203,7 +203,7 @@ int main(int argc, char *argv[]) {
 
                 MPI_Send(&send_msg, 4, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
                 MPI_Recv(&val, 1, MPI_INT, 0, MPI_ANY_TAG, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-                cout << "process " << rank << " about to sleep..." << endl;
+                // cout << "process " << rank << " about to sleep..." << endl;
                 usleep(sleep_time);
                 num_cycles++;
             } while (val == -1 && num_cycles < 15);
