@@ -11,7 +11,7 @@ using namespace std;
 #define EVENT_SIZE 2
 
 // Change as neccessary
-#define INPUT_FILE "input.txt"
+#define INPUT_FILE "input1.txt"
 #define N 3     // # processes
 #define M 4     // # of events
 
