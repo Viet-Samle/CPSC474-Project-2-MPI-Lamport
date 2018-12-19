@@ -63,10 +63,10 @@ int main(int argc, char *argv[]) {
   // char sub_events [1][M][EVENT_SIZE];
 
   if (rank == 0) {
-    MPI_scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
   }
   else {
-    MPI_scatter(NULL, M * EVENT_SIZE, MPI_CHAR, sub_events,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Scatter(NULL, M * EVENT_SIZE, MPI_CHAR, sub_events,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
   }
   // MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, &sub_events, M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 
