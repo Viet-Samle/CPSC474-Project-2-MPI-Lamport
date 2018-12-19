@@ -7,7 +7,7 @@
 
 using namespace std;
 
-#define N 2     // # processes
+#define N 3     // # processes
 #define M 4    // # of events
 #define EVENT_SIZE 2
 
