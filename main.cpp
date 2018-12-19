@@ -7,9 +7,13 @@
 
 using namespace std;
 
-#define N 3     // # processes
-#define M 4    // # of events
+// Do NOT Modify
 #define EVENT_SIZE 2
+
+// Change as neccessary
+#define INPUT_FILE "input.txt"
+#define N 3     // # processes
+#define M 4     // # of events
 
 int main(int argc, char *argv[]) {
   int size, rank;
@@ -25,7 +29,7 @@ int main(int argc, char *argv[]) {
     ifstream test_file;
 
     // Read input file
-    test_file.open("input.txt");
+    test_file.open(INPUT_FILE);
     if (test_file) {
       // cout << "Read file" << endl;
     }
