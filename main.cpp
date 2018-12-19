@@ -13,11 +13,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
   int size, rank;
-<<<<<<< HEAD
   char given_events[N+1][M][EVENT_SIZE];
-=======
-  // char given_events[N][M][EVENT_SIZE];
->>>>>>> 79333646d2917f587c9107c37e5a16991bf2f99d
 
   MPI_Init(&argc, &argv);
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);     // My process number
@@ -101,7 +97,6 @@ int main(int argc, char *argv[]) {
   // char sub_events [1][M][EVENT_SIZE];
 
   if (rank == 0) {
-<<<<<<< HEAD
 
     int result = MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  0, MPI_CHAR, 0, MPI_COMM_WORLD);
     cout << "MPI result " << result << endl;
@@ -109,12 +104,6 @@ int main(int argc, char *argv[]) {
   else {
     int result = MPI_Scatter(NULL, M * EVENT_SIZE, MPI_CHAR, &sub_events,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
     cout << "MPI result " << result << endl;
-=======
-    MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, MPI_IN_PLACE,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
-  }
-  else {
-    MPI_Scatter(NULL, M * EVENT_SIZE, MPI_CHAR, sub_events,  M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
->>>>>>> 79333646d2917f587c9107c37e5a16991bf2f99d
   }
   // MPI_Scatter(given_events, M * EVENT_SIZE, MPI_CHAR, &sub_events, M * EVENT_SIZE, MPI_CHAR, 0, MPI_COMM_WORLD);
 
