@@ -11,7 +11,7 @@ Prof. Doina Bein
 California State University, Fullerton
 
 ## Background
-The goal of this project was to implement Lamport's Logical Clock Calculate using MPI. The idea was to improve the performance of the original algorithm. Since most of the work done was parallelizable, this was a perfect fit for MPI. _[Insert link to Lamport's project 1 here]_
+The goal of this project was to implement Lamport's Logical Clock Calculate using MPI. The idea was to improve the performance of the original algorithm. Since most of the work done was parallelizable, this was a perfect fit for MPI. _[Project 1 - Lamport Implementation](https://github.com/Viet-Samle/Lamport-s-Logical-Clock)_
 
 ## Implementation
 
